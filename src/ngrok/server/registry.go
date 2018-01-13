@@ -6,6 +6,7 @@ import (
 	"net"
 	"ngrok/cache"
 	"ngrok/log"
+	"regexp"
 	"sync"
 	"time"
 )
@@ -158,6 +159,18 @@ func (r *TunnelRegistry) Get(url string) *Tunnel {
 	r.RLock()
 	defer r.RUnlock()
 	return r.tunnels[url]
+}
+
+func (r *TunnelRegistry) RegexGet(url string) *Tunnel {
+	r.RLock()
+	defer r.RUnlock()
+	for k := range r.tunnels {
+		match, _ := regexp.MatchString(k, url)
+		if match {
+			return r.tunnels[k]
+		}
+	}
+	return nil
 }
 
 // ControlRegistry maps a client ID to Control structures
