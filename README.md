@@ -1,6 +1,9 @@
 [![Build
 status](https://travis-ci.org/inconshreveable/ngrok.svg)](https://travis-ci.org/inconshreveable/ngrok)
 
+修改原因:
+原生的ngrok对于每一条内网映射只支持一个子域名，当需要把泛解析的多个域名透传到内网的同一个入口机器上时，需要建立多个映射，因此简单修改一下ngrok的源码，使用正则表达式使内网映射可以支持多个子域名
+
 # ngrok - Introspected tunnels to localhost ([homepage](https://ngrok.com))
 ### ”I want to expose a local server behind a NAT or firewall to the internet.”
 ![](https://ngrok.com/static/img/overview.png)
